@@ -27,10 +27,10 @@ def add_numbers_post():
 	  if request.method == 'GET':
 	  	return render_template('add_numbers.html')
 	  elif request.method == 'POST':
-  	      #print(request.form['text'].split())
+  	      print(request.form['text'].split())
   	      total = 0
   	      try:
-  	      	for str_num in request.form['text']:
+  	      	for str_num in str(request.form['text']):
 			if re.search(r'\d', str_num):
 				total += int(str_num)
   	      	return render_template('add_numbers.html', result=str(total))
