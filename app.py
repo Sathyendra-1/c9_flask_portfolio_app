@@ -16,7 +16,7 @@ def home_page():
 
 @app.route('/<name>')
 def profile(name):
-	edited_name = str(name) + 'Loves to code!'
+	edited_name = str(name) + '!' + ' Loves to code!'
 	return render_template('index.html', name=edited_name)
 
 
@@ -32,9 +32,8 @@ def profile(name):
 #   	      try:
 #   	      	string = str(request.form['text'])
 #   	      	for str_num in string:
-#   	      	for str_num in string:
-# 		  if re.search(r'\d', str_num):
-#   	      		total += int(str_num)
+# 			if re.search(r'\d', str_num):
+# 				total += int(str_num)
 #   	      	return render_template('add_numbers.html', result=str(total))
 #   	      except ValueError:
 #   	      	return "Easy now! Let's keep it simple! enter digits please"
