@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import datetime
 import pytz # timezone 
+import re
 import requests
 import os
 
@@ -15,7 +16,7 @@ def home_page():
 
 @app.route('/<name>')
 def profile(name):
-	return render_template('index.html', name=name)
+	return render_template('index.html', name=str(name) + 'likes to code')
 
 
 @app.route('/add_numbers', methods=['GET','POST'])
@@ -25,14 +26,15 @@ def add_numbers_post():
 	  if request.method == 'GET':
 	  	return render_template('add_numbers.html')
 	  elif request.method == 'POST':
-  	      print(request.form['text'].split())
+  	      #print(request.form['text'].split())
   	      total = 0
   	      try:
-  	      	for str_num in request.form['text'].split():
-  	      		total += int(str_num)
+  	      	for str_num in request.form['text']:
+			if re.match(str_num, \d):
+				total += int(str_num)
   	      	return render_template('add_numbers.html', result=str(total))
   	      except ValueError:
-  	      	return "Easy now! Let's keep it simple! 2 numbers with a space between them please"
+  	      	return "Easy now! Let's keep it simple! enter digits please"
 
 
 @app.route('/shopping_list', methods=['GET','POST'])
